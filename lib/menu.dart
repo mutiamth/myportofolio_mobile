@@ -5,14 +5,14 @@ class MyHomePage extends StatelessWidget {
 
   // Data pemilik portofolio
   final String npm = "2506625230";
-  final String nama = "Mutia";
+  final String nama = "Mutia Muthmainnah";
   final String kelas = "PBP D";
 
   // Daftar tombol menu
   final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Proyek", Icons.folder),
-    ItemHomepage("Tambah Proyek", Icons.add_circle),
-    ItemHomepage("Logout", Icons.logout),
+    ItemHomepage("Lihat Portofolio", Icons.folder, Colors.blue),
+    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.green),
+    ItemHomepage("Logout", Icons.logout, Colors.red),
   ];
 
   @override
@@ -33,7 +33,7 @@ class MyHomePage extends StatelessWidget {
 
       // Body halaman utama dengan padding di sekelilingnya.
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -47,7 +47,7 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 8.0),
 
             // Bagian tengah: pesan sambutan dan kisi tombol menu portofolio.
             Center(
@@ -124,8 +124,9 @@ class InfoCard extends StatelessWidget {
 class ItemHomepage {
   final String name;
   final IconData icon;
+  final Color color;
 
-  ItemHomepage(this.name, this.icon);
+  ItemHomepage(this.name, this.icon, this.color);
 }
 
 // Widget reusable untuk kartu tombol aksi
@@ -137,7 +138,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Theme.of(context).colorScheme.secondary,
+      color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         onTap: () {

@@ -14,6 +14,7 @@ class MyHomePage extends StatelessWidget {
   final List<ItemHomepage> items = [
     ItemHomepage("Lihat Portofolio", Icons.folder, Colors.blue),
     ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.green),
+    ItemHomepage("Tambah Experience", Icons.work_history, Colors.brown),
     ItemHomepage("Logout", Icons.logout, Colors.red),
   ];
 
@@ -36,7 +37,7 @@ class MyHomePage extends StatelessWidget {
       drawer: const LeftDrawer(),
 
       // Body halaman utama
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

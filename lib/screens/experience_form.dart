@@ -5,19 +5,15 @@ class ExperienceFormPage extends StatefulWidget {
   const ExperienceFormPage({super.key});
 
   @override
-  State<ExperienceFormPage> createState() =>
-      _ExperienceFormPageState();
+  State<ExperienceFormPage> createState() => _ExperienceFormPageState();
 }
 
 class _ExperienceFormPageState extends State<ExperienceFormPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _titleController =
-      TextEditingController();
-  final TextEditingController _descriptionController =
-      TextEditingController();
-  final TextEditingController _thumbnailController =
-      TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _thumbnailController = TextEditingController();
 
   String _category = 'Internship';
   DateTime? _endedAt;
@@ -61,8 +57,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
     }
 
     final String title = _titleController.text.trim();
-    final String description =
-        _descriptionController.text.trim();
+    final String description = _descriptionController.text.trim();
     final String thumbnail = _thumbnailController.text.trim();
 
     showDialog(
@@ -88,9 +83,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                 const SizedBox(height: 8),
                 Text('Category: $_category'),
                 const SizedBox(height: 8),
-                Text(
-                  'Thumbnail: ${thumbnail.isEmpty ? '-' : thumbnail}',
-                ),
+                Text('Thumbnail: ${thumbnail.isEmpty ? '-' : thumbnail}'),
                 const SizedBox(height: 8),
                 Text(
                   'Status: ${_isOngoing ? 'Sedang berlangsung' : 'Selesai'}',
@@ -119,9 +112,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
               },
               child: const Text(
                 'OK',
-                style: TextStyle(
-                  color: Color(0xFF3F4D30),
-                ),
+                style: TextStyle(color: Color(0xFF3F4D30)),
               ),
             ),
           ],
@@ -141,10 +132,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
       appBar: AppBar(
         title: const Text(
           'Add Experience',
-          style: TextStyle(
-            color: paper,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: paper, fontWeight: FontWeight.bold),
         ),
         backgroundColor: accentDark,
         foregroundColor: paper,
@@ -170,9 +158,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
               const SizedBox(height: 6),
               const Text(
                 'Fill in the details of your experience.',
-                style: TextStyle(
-                  color: Color(0xFF625D54),
-                ),
+                style: TextStyle(color: Color(0xFF625D54)),
               ),
               const SizedBox(height: 24),
 
@@ -180,9 +166,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
               _buildLabel('Title'),
               TextFormField(
                 controller: _titleController,
-                decoration: _inputDecoration(
-                  'Nama pengalaman',
-                ),
+                decoration: _inputDecoration('Nama pengalaman'),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Title tidak boleh kosong!';
@@ -197,9 +181,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
               TextFormField(
                 controller: _descriptionController,
                 maxLines: 4,
-                decoration: _inputDecoration(
-                  'Deskripsikan pengalaman...',
-                ),
+                decoration: _inputDecoration('Deskripsikan pengalaman...'),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Description tidak boleh kosong!';
@@ -213,9 +195,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
               _buildLabel('Category'),
               DropdownButtonFormField<String>(
                 initialValue: _category,
-                decoration: _inputDecoration(
-                  'Pilih kategori',
-                ),
+                decoration: _inputDecoration('Pilih kategori'),
                 items: _categories.map((category) {
                   return DropdownMenuItem<String>(
                     value: category,
@@ -243,9 +223,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
               TextFormField(
                 controller: _thumbnailController,
                 keyboardType: TextInputType.url,
-                decoration: _inputDecoration(
-                  'https://example.com/image.jpg',
-                ),
+                decoration: _inputDecoration('https://example.com/image.jpg'),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return null;
@@ -255,8 +233,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
 
                   if (uri == null ||
                       !uri.hasScheme ||
-                      (uri.scheme != 'http' &&
-                          uri.scheme != 'https') ||
+                      (uri.scheme != 'http' && uri.scheme != 'https') ||
                       uri.host.isEmpty) {
                     return 'Masukkan URL yang valid!';
                   }
@@ -298,8 +275,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                   },
                   builder: (field) {
                     return Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         InkWell(
                           onTap: () async {
@@ -307,20 +283,20 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                             field.didChange(_endedAt);
                           },
                           child: InputDecorator(
-                            decoration: _inputDecoration(
-                              'Pilih tanggal selesai',
-                            ).copyWith(
-                              errorText: field.errorText,
-                              suffixIcon: const Icon(
-                                Icons.calendar_today,
-                                color: accentDark,
-                              ),
-                            ),
+                            decoration:
+                                _inputDecoration('Pilih tanggal selesai')
+                                    .copyWith(
+                                      errorText: field.errorText,
+                                      suffixIcon: const Icon(
+                                        Icons.calendar_today,
+                                        color: accentDark,
+                                      ),
+                                    ),
                             child: Text(
                               _endedAt == null
                                   ? 'Belum dipilih'
                                   : MaterialLocalizations.of(context)
-                                      .formatMediumDate(_endedAt!),
+                                        .formatMediumDate(_endedAt!),
                               style: TextStyle(
                                 color: _endedAt == null
                                     ? const Color(0xFF625D54)
@@ -345,18 +321,14 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: accentDark,
                     foregroundColor: paper,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 15,
-                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: const Text(
                     'Save Experience',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -387,22 +359,15 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
       fillColor: const Color(0xFFFFFDF8),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
-          color: Color(0xFFD8CDBD),
-        ),
+        borderSide: const BorderSide(color: Color(0xFFD8CDBD)),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
-          color: Color(0xFFD8CDBD),
-        ),
+        borderSide: const BorderSide(color: Color(0xFFD8CDBD)),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
-          color: Color(0xFF65754B),
-          width: 1.5,
-        ),
+        borderSide: const BorderSide(color: Color(0xFF65754B), width: 1.5),
       ),
     );
   }

@@ -1,9 +1,12 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:provider/provider.dart';
 
+import 'package:myportofolio_mobile/screens/project_list.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
+import 'package:myportofolio_mobile/screens/education_list.dart';
+import 'package:myportofolio_mobile/screens/education_form.dart';
 import 'package:myportofolio_mobile/screens/login_screen.dart';
 import 'package:myportofolio_mobile/services/auth_state.dart';
 import 'package:myportofolio_mobile/widgets/auth_guard.dart';
@@ -59,19 +62,41 @@ class LeftDrawer extends StatelessWidget {
             ),
           ),
 
-          // Menu Home
           ListTile(
             leading: const Icon(Icons.home_outlined),
             title: const Text('Home'),
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => MyHomePage()),
+                MaterialPageRoute(builder: (_) => MyHomePage()),
               );
             },
           ),
 
-          // Menu Add Project (memerlukan login)
+          ListTile(
+            leading: const Icon(Icons.folder_outlined),
+            title: const Text('Portfolio'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ProjectListScreen()),
+              );
+            },
+          ),
+
+          ListTile(
+            leading: const Icon(Icons.school_outlined),
+            title: const Text('Education'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const EducationListScreen()),
+              );
+            },
+          ),
+
           ListTile(
             leading: const Icon(Icons.add_circle_outline),
             title: const Text('Add Project'),
@@ -82,30 +107,39 @@ class LeftDrawer extends StatelessWidget {
 
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const ProjectFormPage(),
-                ),
+                MaterialPageRoute(builder: (_) => const ProjectFormPage()),
               );
             },
           ),
 
-          // Menu Add Experience
+          ListTile(
+            leading: const Icon(Icons.school),
+            title: const Text('Add Education'),
+            onTap: () async {
+              final loggedIn = await ensureLoggedIn(context);
+
+              if (!context.mounted || !loggedIn) return;
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const EducationFormPage()),
+              );
+            },
+          ),
+
           ListTile(
             leading: const Icon(Icons.work_history_outlined),
             title: const Text('Add Experience'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const ExperienceFormPage(),
-                ),
+                MaterialPageRoute(builder: (_) => const ExperienceFormPage()),
               );
             },
           ),
 
           const Divider(),
 
-          // Login atau Logout berdasarkan status autentikasi
           if (!authState.isLoggedIn)
             ListTile(
               leading: const Icon(Icons.login),
@@ -115,7 +149,7 @@ class LeftDrawer extends StatelessWidget {
 
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  MaterialPageRoute(builder: (_) => const LoginScreen()),
                 );
               },
             )

@@ -8,14 +8,13 @@ import 'package:myportofolio_mobile/services/auth_state.dart';
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
-  // Data pemilik portofolio
   final String npm = "2506625230";
   final String nama = "Mutia Muthmainnah";
   final String kelas = "PBP D";
 
-  // Daftar tombol menu
   final List<ItemHomepage> items = [
     ItemHomepage("Lihat Portofolio", Icons.folder, Colors.blue),
+    ItemHomepage("Lihat Education", Icons.school, Colors.indigo),
     ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.green),
     ItemHomepage("Tambah Experience", Icons.work_history, Colors.brown),
     ItemHomepage("Logout", Icons.logout, Colors.red),
@@ -33,15 +32,12 @@ class MyHomePage extends StatelessWidget {
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-
       drawer: const LeftDrawer(),
-
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Informasi pemilik portofolio
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -50,16 +46,11 @@ class MyHomePage extends StatelessWidget {
                 InfoCard(title: 'Class', content: kelas),
               ],
             ),
-
             const SizedBox(height: 8.0),
-
-            // Status autentikasi
             Text(
               authState.isLoggedIn ? 'Status: Logged In' : 'Status: Guest',
               style: const TextStyle(fontWeight: FontWeight.w500),
             ),
-
-            // daftar tombol
             Center(
               child: Column(
                 children: [
@@ -73,8 +64,6 @@ class MyHomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  // Grid tombol menu
                   GridView.count(
                     primary: true,
                     padding: const EdgeInsets.all(20),
@@ -96,7 +85,6 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-// Widget reusable untuk kartu informasi pemilik
 class InfoCard extends StatelessWidget {
   final String title;
   final String content;
@@ -122,7 +110,6 @@ class InfoCard extends StatelessWidget {
   }
 }
 
-// Model data untuk setiap tombol menu
 class ItemHomepage {
   final String name;
   final IconData icon;

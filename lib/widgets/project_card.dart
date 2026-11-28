@@ -5,6 +5,7 @@ import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_list.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
+import 'package:myportofolio_mobile/screens/education_list.dart';
 import 'package:myportofolio_mobile/screens/login_screen.dart';
 import 'package:myportofolio_mobile/services/auth_state.dart';
 import 'package:myportofolio_mobile/widgets/auth_guard.dart';
@@ -19,6 +20,11 @@ class ItemCard extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (_) => const ProjectListScreen()),
+      );
+    } else if (item.name == 'Lihat Education') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const EducationListScreen()),
       );
     } else if (item.name == 'Tambah Proyek') {
       final loggedIn = await ensureLoggedIn(context);
